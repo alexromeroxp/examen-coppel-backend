@@ -4,24 +4,25 @@
 !define DATABASE database
 !define LINE -[hidden]->
 
-RECTANGLE Frontend {
-}
 
-RECTANGLE Backend {
-}
+
 
 DATABASE "Base de Datos" {
 }
 
 cloud {
   RECTANGLE "Navegador Web" as Browser
+RECTANGLE Frontend {
+}
+
 }
 
 cloud {
   RECTANGLE "Servidor Web" as WebServer
+RECTANGLE Backend {
+}
 }
 
-WebServer --|> Backend: HTTP Request
 Browser --|> WebServer: HTTP Request
 Backend --|> "Base de Datos"
 
