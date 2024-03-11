@@ -1,0 +1,28 @@
+@startuml
+!define RECTANGLE class
+!define INTERFACE interface
+!define DATABASE database
+!define LINE -[hidden]->
+
+RECTANGLE Frontend {
+}
+
+RECTANGLE Backend {
+}
+
+DATABASE "Base de Datos" {
+}
+
+cloud {
+  RECTANGLE "Navegador Web" as Browser
+}
+
+cloud {
+  RECTANGLE "Servidor Web" as WebServer
+}
+
+WebServer --|> Backend: HTTP Request
+Browser --|> WebServer: HTTP Request
+Backend --|> "Base de Datos"
+
+@enduml

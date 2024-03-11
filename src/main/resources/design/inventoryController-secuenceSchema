@@ -1,0 +1,90 @@
+@startuml
+
+actor User
+participant Controller as "InventoryController"
+participant Service as "InventoryService"
+database Database as "InventoryRepository"
+participant ResponseEntity
+participant ResponseUtilDTO
+
+User -> Controller: GET /inventory/{sku}
+activate Controller
+Controller -> Service: getInventoryBySku(sku)
+activate Service
+Service -> Database: getInventoryBySku(sku)
+activate Database
+Database --> Service: InventoryEntity
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(inventory)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: GET /inventory/all
+activate Controller
+Controller -> Service: getAllInventory()
+activate Service
+Service -> Database: getAllInventory()
+activate Database
+Database --> Service: List<InventoryEntity>
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(inventoryList)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: POST /inventory/add
+activate Controller
+Controller -> Service: addInventory(inventory)
+activate Service
+Service -> Database: addInventory(inventory)
+activate Database
+Database --> Service: InventoryEntity
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(addedInventory)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: PUT /inventory/update
+activate Controller
+Controller -> Service: updateInventory(inventory)
+activate Service
+Service -> Database: updateInventory(inventory)
+activate Database
+Database --> Service: InventoryEntity
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse("Se actualizó correctamente el inventario # " + updatedInventory.getSku())
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: DELETE /inventory/delete/{sku}
+activate Controller
+Controller -> Service: deleteInventoryBySku(sku)
+activate Service
+Service -> Database: deleteInventoryBySku(sku)
+activate Database
+Database --> Service: void
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse("Se eliminó correctamente el inventario # " + sku)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+@enduml

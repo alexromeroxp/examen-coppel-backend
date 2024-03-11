@@ -1,0 +1,41 @@
+@startuml
+
+package "Ambiente del Frontend" {
+  [Navegador web]
+  [Dispositivos de usuario (PC, laptop, tablet, smartphone)]
+  [Cliente Ligero]
+}
+
+package "Ambiente del Backend" {
+  [Servidor web (Tomcat, Jetty, etc.)]
+  [Máquina virtual Java (JVM)]
+  [Framework Spring Boot]
+  [Sistema de gestión de base de datos (PostgreSQL)]
+  [Servidores físicos o máquinas virtuales]
+  [Centralizada]
+}
+
+package "Ambiente de la Base de Datos" {
+  [Sistema de gestión de base de datos (PostgreSQL)]
+  [Servidores físicos o máquinas virtuales]
+  [Centralizada]
+}
+
+package "Ambiente de Desarrollo (opcional)" {
+  [Herramientas de desarrollo (IDE como IntelliJ, Eclipse)]
+  [Maven]
+  [Estaciones de trabajo para desarrolladores]
+}
+
+[Navegador web] --> [Cliente Ligero]
+[Dispositivos de usuario (PC, laptop, tablet, smartphone)] --> [Cliente Ligero]
+[Cliente Ligero] --> [Servidor web (Tomcat, Jetty, etc.)]
+[Servidor web (Tomcat, Jetty, etc.)] --> [Máquina virtual Java (JVM)]
+[Máquina virtual Java (JVM)] --> [Framework Spring Boot]
+[Framework Spring Boot] --> [Sistema de gestión de base de datos (PostgreSQL)]
+[Sistema de gestión de base de datos (PostgreSQL)] --> [Servidores físicos o máquinas virtuales]
+[Servidores físicos o máquinas virtuales] --> [Centralizada]
+[Sistema de gestión de base de datos (PostgreSQL)] --> [Centralizada]
+[Herramientas de desarrollo (IDE como IntelliJ, Eclipse)] --> [Estaciones de trabajo para desarrolladores]
+
+@enduml

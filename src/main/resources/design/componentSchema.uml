@@ -1,0 +1,79 @@
+@startuml
+package "Backend" {
+  [SpringBootApp]
+  [JpaTransactionManager]
+  [DataSource]
+  [SecurityConfig]
+  [LoggerConfig]
+  [Repository]
+}
+
+package "Base de Datos" {
+  [Entity1]
+  [Entity2]
+  [Entity3]
+}
+
+package "Configuración de JPA" {
+  [application.properties]
+  [Hibernate Properties]
+}
+
+package "Seguridad" {
+  [Spring Security]
+}
+
+package "Loggers" {
+  [SLF4J]
+  [slf4j-log4j12]
+  [@Slf4j]
+}
+
+package "Pruebas" {
+  [JUnit/TestNG]
+  [Mockito]
+}
+
+package "Despliegue y Orquestación" {
+  [Docker]
+  [Maven Docker Plugin]
+  [Kubernetes]
+}
+
+package "Monitorización y Tracer" {
+  [Prometheus]
+  [Spring Cloud Sleuth]
+}
+
+package "API RESTful" {
+  [Spring MVC]
+  [Swagger/Springfox]
+}
+
+package "Manejo de Excepciones y Errores" {
+  [@ControllerAdvice]
+}
+
+package "Documentación de la API" {
+  [Swagger/Springfox]
+}
+
+package "Frontend" {
+  [Angular App]
+}
+
+[SpringBootApp] --> [JpaTransactionManager]
+[SpringBootApp] --> [SecurityConfig]
+[JpaTransactionManager] --> [DataSource]
+[LoggerConfig] --> [slf4j-log4j12]
+[Repository] --> [Entity1]
+[Repository] --> [Entity2]
+[Repository] --> [Entity3]
+[SecurityConfig] --> [Spring Security]
+[LoggerConfig] --> [SLF4J]
+[LoggerConfig] --> [@Slf4j]
+[API RESTful] --> [Spring MVC]
+[API RESTful] --> [Swagger/Springfox]
+[Swagger/Springfox] --> [Documentación de la API]
+[Frontend] --> [API RESTful]
+@enduml

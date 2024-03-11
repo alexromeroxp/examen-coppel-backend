@@ -1,0 +1,90 @@
+@startuml
+
+actor User
+participant Controller as "PolicyController"
+participant Service as "PolicyService"
+database Database as "PolicyRepository"
+participant ResponseEntity
+participant ResponseUtilDTO
+
+User -> Controller: GET /policy/{policyId}
+activate Controller
+Controller -> Service: getPolicyByPolicyId(policyId)
+activate Service
+Service -> Database: findByPolicyId(policyId)
+activate Database
+Database --> Service: PolicyEntity
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(policy)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: GET /policy/all
+activate Controller
+Controller -> Service: getAllPolicies()
+activate Service
+Service -> Database: findAllPolicies()
+activate Database
+Database --> Service: List<PolicyEntity>
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(policies)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: POST /policy/add
+activate Controller
+Controller -> Service: addPolicy(policy)
+activate Service
+Service -> Database: savePolicy(policy)
+activate Database
+Database --> Service: PolicyEntity
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(addedPolicy)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: PUT /policy/update
+activate Controller
+Controller -> Service: updatePolicy(policy)
+activate Service
+Service -> Database: savePolicy(policy)
+activate Database
+Database --> Service: PolicyEntity
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse("Se actualizó correctamente la póliza # " + updatedPolicy.getPolicyId())
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: DELETE /policy/delete/{policyId}
+activate Controller
+Controller -> Service: deletePolicyByPolicyId(policyId)
+activate Service
+Service -> Database: deletePolicyByPolicyId(policyId)
+activate Database
+Database --> Service: void
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse("Se eliminó correctamente la póliza # " + policyId)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+@enduml

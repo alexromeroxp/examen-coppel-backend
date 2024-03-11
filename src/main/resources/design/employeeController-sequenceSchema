@@ -1,0 +1,90 @@
+@startuml
+
+actor User
+participant Controller as "EmployeeController"
+participant Service as "EmployeeService"
+database Database as "EmployeeRepository"
+participant ResponseEntity
+participant ResponseUtilDTO
+
+User -> Controller: GET /employee/{employeeId}
+activate Controller
+Controller -> Service: getEmployeeById(employeeId)
+activate Service
+Service -> Database: findById(employeeId)
+activate Database
+Database --> Service: Optional<EmployeeEntity>
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(employee)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: GET /employee/all
+activate Controller
+Controller -> Service: getAllEmployees()
+activate Service
+Service -> Database: findAllEmployees()
+activate Database
+Database --> Service: List<EmployeeEntity>
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(employees)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: POST /employee/add
+activate Controller
+Controller -> Service: addEmployee(employee)
+activate Service
+Service -> Database: saveEmployee(employee)
+activate Database
+Database --> Service: EmployeeEntity
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse(addedEmployee)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: PUT /employee/update
+activate Controller
+Controller -> Service: updateEmployee(employee)
+activate Service
+Service -> Database: saveEmployee(employee)
+activate Database
+Database --> Service: EmployeeEntity
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse("Se actualizó correctamente el empleado # " + updatedEmployee.getEmployeeId())
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+User -> Controller: DELETE /employee/delete/{employeeId}
+activate Controller
+Controller -> Service: deleteEmployeeById(employeeId)
+activate Service
+Service -> Database: deleteEmployeeById(employeeId)
+activate Database
+Database --> Service: void
+deactivate Database
+Service -> ResponseUtilDTO: generateSuccessResponse("Se eliminó correctamente el empleado # " + employeeId)
+activate ResponseUtilDTO
+ResponseUtilDTO --> ResponseEntity: ResponseEntity<Response<Object>>
+deactivate ResponseUtilDTO
+deactivate Service
+Controller --> User: ResponseEntity<Response<Object>>
+deactivate Controller
+
+@enduml

@@ -1,0 +1,64 @@
+LISTADO DE IMPACTO:
+
+
+Backend (Lógica del Servidor):
+Características Técnicas:
+Desarrollado con Spring Boot 3.1.9 para aprovechar las últimas funcionalidades y correcciones.
+Utiliza JPA (Java Persistence API) para la capa de acceso a la base de datos.
+Implementa un mecanismo de transacciones para garantizar la consistencia de la base de datos.
+Utiliza Maven para gestionar las dependencias, compilar el proyecto y construir el archivo JAR.
+Configurado para utilizar Java 17 como la versión principal del lenguaje de programación.
+Base de Datos:
+Características Técnicas:
+Utiliza PostgreSQL como base de datos relacional compatible con JPA.
+Define entidades JPA que mapean a tablas en la base de datos.
+Aprovecha las capacidades de JPA para simplificar las operaciones CRUD.
+Configuración de JPA:
+Características Técnicas:
+Configuración de la conexión a la base de datos en el archivo application.properties.
+Uso de anotaciones JPA (@Entity, @Table, etc.) para definir entidades.
+Configuración de Hibernate a través de propiedades JPA.
+Seguridad:
+Características Técnicas:
+Implementa seguridad con Spring Security para proteger los recursos y controlar el acceso.
+Loggers:
+Características Técnicas:
+Configuración de loggers utilizando SLF4J como fachada de registro.
+Uso de slf4j-log4j12 como implementación de logger para Log4j 2.
+Implementa anotaciones de logging como @Slf4j para simplificar la creación de instancias de loggers.
+Frontend (Interfaz de Usuario):
+Características Técnicas:
+Desarrollado con tecnología Angular con los beneficios de la programacion reactiva en los template
+Realiza solicitudes HTTP a través de servicios RESTful expuestos por el backend.
+Implementa lógica de presentación para consumir y mostrar datos del backend.
+API RESTful:
+Características Técnicas:
+Define y expone endpoints RESTful para interactuar con recursos.
+Utiliza anotaciones de Spring (@RestController, @RequestMapping, etc.) para la creación de controladores.
+Aplica principios REST para la creación de URLs y métodos HTTP.
+Documentación de la API:
+Características Técnicas:
+Utiliza herramientas como Swagger o Springfox para generar documentación interactiva de la API.
+Proporciona información detallada sobre cada endpoint, parámetros y respuestas.
+Manejo de Excepciones y Errores:
+Características Técnicas:
+Implementa un mecanismo centralizado para manejar excepciones con @ControllerAdvice.
+Proporciona respuestas JSON coherentes en caso de errores basadas en la requisicion.
+
+
+Pruebas(Pendiente):
+Características Técnicas:
+Implementa pruebas unitarias para servicios y controladores utilizando JUnit o TestNG.
+Utiliza herramientas como Mockito para simular dependencias en pruebas unitarias.
+Realiza pruebas de integración para validar la interacción entre componentes.
+Despliegue y Orquestación (Pendiente):
+Características Técnicas:
+Empaqueta la aplicación en contenedores Docker para facilitar el despliegue y la portabilidad.
+Utiliza el plugin de Maven para construir y gestionar imágenes de contenedor.
+Puede orquestarse con Kubernetes para la implementación y escalabilidad.
+Monitorización y Tracer (Pendiente):
+Características Técnicas:
+Utiliza herramientas como Prometheus para la monitorización de métricas.
+Implementa el rastreo de solicitudes con herramientas como Spring Cloud Sleuth.
+
+

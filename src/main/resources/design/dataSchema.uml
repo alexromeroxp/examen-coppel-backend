@@ -1,0 +1,25 @@
+@startuml
+entity PolicyEntity {
+  + policyId: Long
+  - employeeId: int
+  - sku: String
+  - quantity: int
+  - date: Date
+}
+
+entity InventoryEntity {
+  + sku: String
+  - name: String
+  - quantity: int
+}
+
+entity EmployeeEntity {
+  + employeeId: Long
+  - name: String
+  - lastName: String
+  - position: String
+}
+
+PolicyEntity --|> InventoryEntity: inventory
+PolicyEntity --|> EmployeeEntity: employee
+@enduml
